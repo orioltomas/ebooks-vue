@@ -4,8 +4,9 @@
 ```
 npm install
 ```
-Add ebook files on '/public/ebooks' folder.
-Define all ebook info on '/src/data/ebooks.json', like so:
+- Add ebook files on '/public/ebooks' folder.
+
+- Define all ebook info on '/src/data/ebooks.json', like so:
 ```
 [
   {
