@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 /dist
+/src/data/ebooks.json
+/public/ebooks/*
+!/public/ebooks/
 
 
 # local env files

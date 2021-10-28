@@ -1,0 +1,8 @@
+[
+  {"name": "Terror", "value": "horror"},
+  {"name": "Policíaca i Misteri", "value": "detective-mystery"},
+  {"name": "Fantasia", "value": "fantasy"},
+  {"name": "Ciència-ficció", "value": "science-fiction"},
+  {"name": "Ficció", "value": "fiction"},
+  {"name": "No ficció", "value": "non-fiction"}
+]
