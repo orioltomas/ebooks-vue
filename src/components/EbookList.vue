@@ -1,22 +1,5 @@
 <template>
-  <div class="search">
-    <h3 class="title">Busca el teu ebook:</h3>
-    <input v-model="search.value" placeholder="Nom o Autor" />
-    <select v-model="category.value">
-      <option value="">
-        All Categories
-      </option>
-      <template
-        v-for="(category, index) in categories"
-        :key="index"
-      >
-        <option :value="category.value">
-          {{ category.name }}
-        </option>
-      </template>
-    </select>
-  </div>
-
+  <Search/>
   <div class="ebook-list">
     <div class="headline">
       <h1>Ebooks disponibles</h1>
@@ -36,6 +19,8 @@
 
 <script>
 import { computed, reactive } from '@vue/reactivity';
+import store from './../store/store';
+import Search from './Search.vue';
 import Ebook from './Ebook.vue';
 import ebooks from './../data/ebooks';
 import categories from './../data/categories';
@@ -43,11 +28,16 @@ import categories from './../data/categories';
 export default {
   name: 'EbookList',
   components: {
+    Search,
     Ebook
   },
   setup() {
-    const search = reactive({value: ''});
-    const category = reactive({value: ''});
+    const search = computed(() => {
+      return store.state.search;
+    });
+    const category = computed(() => {
+      return store.state.category;
+    });
     const order = reactive({value: 'creation'});
 
     const showEbooks = computed(() => {
@@ -96,27 +86,6 @@ export default {
 </script>
 
 <style scoped>
-.search {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: fit-content;
-  margin: 25px auto 0;
-}
-.search .title {
-  margin-block: 0;
-}
-.search > * {
-  margin: 15px;
-}
-input {
-  color: white;
-  background-color: #0b0b0b;
-  padding: 5px 10px;
-  border-color: white;
-  border-width: 0 0 1px 0;
-  letter-spacing: 1px;
-}
 select {
   color: white;
   background-color: #0b0b0b;
@@ -125,14 +94,8 @@ select {
   border-width: 0 0 1px 0;
   letter-spacing: 1px;
 }
-input:focus-visible,
 select:focus-visible {
   outline: none;
-}
-@media (min-width: 576px) {
-  .search {
-    flex-direction: row;
-  }
 }
 
 .ebook-list {

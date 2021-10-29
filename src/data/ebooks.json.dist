@@ -1,18 +1,3 @@
-# ebooks-vue
-
-## Project setup
-```
-npm install
-```
-- Add ebook files on '/public/ebooks' folder.
-
-- Define all ebook info on '/src/data/ebooks.json'.
-```
-cd ebooks-vue/src/data
-cp ebooks.json.dist ebooks.json
-```
-Ebook type:
-```
 [
   {
     "title": "The name of the wind",
@@ -28,22 +13,3 @@ Ebook type:
     }
   }
 ]
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
