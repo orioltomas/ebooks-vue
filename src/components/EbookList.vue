@@ -40,9 +40,8 @@ export default {
     });
     const order = reactive({value: 'creation'});
 
-    const showEbooks = computed(() => {
-
-      const sortedEbooks = ebooks.sort((a, b) => {
+    const sortEbooks = (ebooks) => {
+      return ebooks.sort((a, b) => {
         let date1, date2;
         if (order.value == 'creation') {
           date1 = new Date(a.creation);
@@ -58,20 +57,33 @@ export default {
           return 1;
         }
       });
+    };
 
-      if (search.value == '' && category.value == '') return sortedEbooks;
-
-      return sortedEbooks.filter(ebook => {
+    const filterEbooks = (ebooks) => {
+      return ebooks.filter(ebook => {
         const lowerSearch = search.value.toLowerCase();
         const lowerTitle = ebook.title.toLowerCase();
         const lowerAuthor = ebook.author.toLowerCase();
+        
+        const foundSearch = (
+          lowerSearch == '' ||
+          lowerTitle.includes(lowerSearch) ||
+          lowerAuthor.includes(lowerSearch)
+        );
 
-        return (
-          (lowerTitle.includes(lowerSearch) ||
-          lowerAuthor.includes(lowerSearch)) &&
+        const foundCategory = (
+          category.value == '' ||
           ebook.categories.includes(category.value)
         );
+
+        return (foundSearch && foundCategory);
       });
+    }
+
+    const showEbooks = computed(() => {
+      const sortedEbooks = sortEbooks(ebooks);
+      if (search.value == '' && category.value == '') return sortedEbooks;
+      return filterEbooks(sortedEbooks);
     });
 
     return {
@@ -99,7 +111,7 @@ select:focus-visible {
 }
 
 .ebook-list {
-  margin-top: 50px;
+  margin-top: 25px;
   padding: 0 20px;
   text-align: left;
 }
@@ -107,6 +119,7 @@ select:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 .ebook-list h1 {
   text-transform: uppercase;

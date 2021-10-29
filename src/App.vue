@@ -10,29 +10,6 @@ export default {
   name: 'App',
   components: {
     EbookList
-  },
-  setup() {
-    const handleScroll = () => {
-      const logoImg = document.getElementById('logo-img');
-      
-      if (window.scrollY > 25) {
-        logoImg.style.width = '100px';
-        logoImg.style.height = '100px';
-      } else {
-        logoImg.style.width = '150px';
-        logoImg.style.height = '150px';
-      }
-    };
-
-    return {
-      handleScroll
-    }
-  },
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -49,16 +26,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  padding: 30px 0;
+  padding: 25px 0;
 }
 #logo-img {
-  width: 150px;
-  height: 150px;
-  transition: all 1s linear;
-}
-@media (min-width: 576px) {
-  #app {
-    padding: 50px 0;
-  }
+  width: 125px;
+  height: 125px;
 }
 </style>

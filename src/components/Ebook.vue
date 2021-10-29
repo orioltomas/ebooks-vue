@@ -4,21 +4,23 @@
       <div>
         <div class="field">
           <label>Títol:</label>
-          {{ ebook.title }}
+          <span>{{ ebook.title }}</span>
         </div>
         <div class="field">
           <label>Autor:</label>
-          {{ebook.author}}
+          <span class="author" @click="searchAuthor()">
+            {{ ebook.author }}
+          </span>
         </div>
       </div>
       <div>
         <div class="field year">
           <label>Publicat l'any:</label>
-          {{ ebook.publication }}
+          <span>{{ ebook.publication }}</span>
         </div>
         <div class="field year">
           <label>Afegit:</label>
-          {{ dateFormat(ebook.creation) }}
+          <span>{{ dateFormat(ebook.creation) }}</span>
         </div>
       </div>
     </div>
@@ -83,6 +85,7 @@
 </template>
 
 <script>
+import store from './../store/store';
 import categories from './../data/categories';
 
 export default {
@@ -93,7 +96,7 @@ export default {
       showDescription: false
     }
   },
-  setup() {
+  setup(props) {
     const dateFormat = (dateString) => {
       const date = new Date(dateString);
       let formattedDate = date.getDate().toString();
@@ -112,10 +115,16 @@ export default {
       }
     };
 
+    const searchAuthor = () => {
+      console.log(props.ebook.author);
+      store.commit('changeSearch', props.ebook.author);
+    }
+
     return {
       categories,
       dateFormat,
-      categoryName
+      categoryName,
+      searchAuthor
     }
   }
 }
@@ -137,9 +146,14 @@ export default {
   text-align: left;
 }
 .ebook label {
+  margin-right: 5px;
   color: #d4ae68;
   text-transform: uppercase;
   font-weight: 500;
+}
+.ebook .author:hover {
+  cursor: pointer;
+  text-shadow: 0 0 5px #d4ae68;
 }
 .ebook .description a {
   color: #d4ae68;
