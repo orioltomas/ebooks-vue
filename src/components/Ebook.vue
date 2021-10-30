@@ -1,7 +1,7 @@
 <template>
   <div class="ebook">
     <div class="details">
-      <div>
+      <div class="column-left">
         <div class="field">
           <label>Títol:</label>
           <span>{{ ebook.title }}</span>
@@ -12,8 +12,30 @@
             {{ ebook.author }}
           </span>
         </div>
+        <div class="description">
+          <div class="field">
+            <a
+              href="#"
+              @click.prevent="showDescription = !showDescription"
+            >
+              <label
+                class="description-link"
+              >
+                Descripció
+                <img
+                  class="description-icon"
+                  :class="showDescription ? 'show' : ''"
+                  src="./../assets/down-arrow.svg"
+                />
+              </label>
+            </a>
+            <div v-if="showDescription">
+              {{ ebook.description }}
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
+      <div class="column-right">
         <div class="field year">
           <label>Publicat l'any:</label>
           <span>{{ ebook.publication }}</span>
@@ -22,38 +44,16 @@
           <label>Afegit:</label>
           <span>{{ dateFormat(ebook.creation) }}</span>
         </div>
-      </div>
-    </div>
-    <div class="description">
-      <div class="field">
-        <a
-          href="#"
-          @click.prevent="showDescription = !showDescription"
+        <div
+          class="categories"
+          v-for="(category, index) in ebook.categories"
+          :key="index"
         >
-          <label
-            class="description-link"
-          >
-            Descripció
-            <img
-              class="description-icon"
-              :class="showDescription ? 'show' : ''"
-              src="./../assets/down-arrow.svg"
-            />
-          </label>
-        </a>
-        <div v-if="showDescription">
-          {{ ebook.description }}
+            <div class="field" v-if="categoryName(category)">
+              {{ categoryName(category) }}
+            </div>
         </div>
       </div>
-    </div>
-    <div
-      class="categories"
-      v-for="(category, index) in ebook.categories"
-      :key="index"
-    >
-        <div class="field" v-if="categoryName(category)">
-          {{ categoryName(category) }}
-        </div>
     </div>
     <div class="downloads" v-if="ebook.files">
       <template v-if="ebook.files.ca">
@@ -138,6 +138,9 @@ export default {
 .ebook .details {
   display: block;
 }
+.ebook .details .column-right {
+  min-width: 130px;
+}
 .ebook .field {
   margin-bottom: 5px;
 }
@@ -172,6 +175,7 @@ export default {
 }
 .ebook .categories {
   display: flex;
+  justify-content: flex-end;
   margin-top: 10px;
 }
 .ebook .categories .field {
@@ -189,6 +193,9 @@ export default {
   color: white;
   border: 1px solid #d4ae68;
   padding: 5px 10px;
+}
+.ebook .download-btn:not(:first-of-type) {
+  margin-left: 5px;
 }
 @media (min-width: 576px) {
   .ebook .details {

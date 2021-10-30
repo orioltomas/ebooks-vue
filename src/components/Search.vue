@@ -96,6 +96,9 @@ export default {
   watch: {
     searchStore (newValue) {
       this.search = newValue;
+      if (newValue != '') {
+        this.showSearch = true;
+      }
     }
   }
 }
