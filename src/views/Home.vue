@@ -26,10 +26,12 @@ export default {
     const password = ref('');
 
     const enter = () => {
-      if (password.value === process.env.VUE_APP_SECRET) {
+      const hashedPassword = stringToHash(password.value).toString();
+
+      if (hashedPassword === process.env.VUE_APP_SECRET) {
         window.localStorage.setItem(
           'password',
-          stringToHash(password.value)
+          hashedPassword
         );
         router.push({ name: 'ebooks' });
       } else {
