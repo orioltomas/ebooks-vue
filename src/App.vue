@@ -1,16 +1,10 @@
 <template>
-  <img id="logo-img" alt="Ebooks" src="/ebooks-logo.png">
-  <EbookList/>
+  <router-view></router-view>
 </template>
 
 <script>
-import EbookList from './components/EbookList.vue';
-
 export default {
-  name: 'App',
-  components: {
-    EbookList
-  }
+  name: 'App'
 }
 </script>
 
@@ -27,9 +21,5 @@ body {
   text-align: center;
   color: white;
   padding: 25px 0;
-}
-#logo-img {
-  width: 125px;
-  height: 125px;
 }
 </style>
