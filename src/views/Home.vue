@@ -2,14 +2,14 @@
   <div class="home">
     <img id="home-logo" alt="Ebooks" src="/ebooks-logo.png">
     <div class="error">
-      INCORRECT PASSWORD
+      CONTRASENYA INCORRECTA
     </div>
     <div class="password">
-      <input v-model="password" placeholder="PASSWORD" />
+      <input v-model="password" placeholder="CONTRASENYA" />
     </div>
     <div class="enter">
       <button @click="enter()">
-        ENTER
+        ENTRA
       </button>
     </div>
   </div>
@@ -95,6 +95,7 @@ export default {
   border: 1px solid #d4ec68;
   border-radius: 20px;
   background-color: transparent;
+  box-shadow: 0 0 10px #d4ec68;
   transition: all .5s linear;
 }
 .home button:hover {
