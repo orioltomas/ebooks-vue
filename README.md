@@ -11,7 +11,7 @@ npm install
 cd ebooks-vue/src/data
 cp ebooks.json.dist ebooks.json
 ```
-Ebook type:
+Ebooks data example to add in ebooks.json:
 ```
 [
   {
@@ -24,11 +24,18 @@ Ebook type:
     "files": {
       "ca": null,
       "es": null,
-      "en": "The name of the wind.mobi"
+      "en": "The_name_of_the_wind-Patrick_Rothfuss.mobi"
     }
   }
 ]
 ```
+
+- Create .env file from .env.dist.
+```
+cp .env.dist .env
+```
+
+- Replace VUE_APP_SECRET with your hashed password. You can get it by running the app and visiting the following path: /hash-password and then copy-paste it into your .env file.
 
 ### Compiles and hot-reloads for development
 ```

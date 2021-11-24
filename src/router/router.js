@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import Home from './../views/Home.vue'
 import Ebooks from './../views/Ebooks.vue'
+import HashPassword from './../views/HashPassword.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/ebooks',
     name: 'ebooks',
     component: Ebooks
+  },
+  {
+    path: '/hash-password',
+    name: 'hashPassword',
+    component: HashPassword
   }
 ];
 

@@ -13,17 +13,25 @@
       </template>
     </h3>
     <div class="form" v-if="showSearch">
-      <input
-        v-model="search"
-        @keyup="changeSearch($event)"
-        placeholder="Nom o Autor"
-      />
+      <div class="input-container">
+        <input
+          v-model="search"
+          @keyup="changeSearch($event)"
+          placeholder="Nom o Autor"
+        />
+        <img 
+          class="close-icon"
+          src="./../assets/close.svg"
+          v-if="search != ''"
+          @click="clearSearch()"
+        />
+      </div>
       <select
         v-model="category"
         @change="changeCategory()"
       >
         <option value="">
-          All Categories
+          Totes les categories
         </option>
         <template
           v-for="(category, index) in categories"
@@ -62,7 +70,6 @@ export default {
       }
     };
     const changeSearch = (event) => {
-
       if (event.code == 'Enter') {
         clearTimer();
         setSearchStore();
@@ -73,6 +80,11 @@ export default {
           1500
         );
       }
+    };
+
+    const clearSearch = () => {
+      search.value = '';
+      setSearchStore();
     };
 
     const setSearchStore = () => {
@@ -88,6 +100,7 @@ export default {
       search,
       searchStore,
       changeSearch,
+      clearSearch,
       categories,
       category,
       changeCategory
@@ -136,7 +149,7 @@ export default {
 input {
   color: white;
   background-color: #0b0b0b;
-  padding: 5px 10px;
+  padding: 5px 20px 5px 10px;
   border-color: white;
   border-width: 0 0 1px 0;
   letter-spacing: 1px;
@@ -152,6 +165,20 @@ select {
 input:focus-visible,
 select:focus-visible {
   outline: none;
+}
+.search .input-container {
+  position: relative;
+}
+.search .close-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 13px;
+}
+.search .close-icon:hover {
+  cursor: pointer;
 }
 @media (min-width: 576px) {
   .search .form {
